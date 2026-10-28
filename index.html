@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Irregular Verbs List - Teacher Verónica Hermida</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts: Inter & Outfit -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc;
+        }
+        .heading-font {
+            font-family: 'Outfit', sans-serif;
+        }
+        .verb-card {
+            transition: all 0.2s ease-in-out;
+        }
+        .verb-card:hover {
+            transform: translateY(-2px);
+        }
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+    </style>
+</head>
+<body class="text-slate-800 antialiased min-h-screen flex flex-col bg-slate-50">
+
+    <!-- HEADER -->
+    <header class="bg-indigo-900 text-white shadow-md sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto px-4 py-4 flex flex-col sm:flex-row items-center justify-between gap-4">
+            
+            <div>
+                <span class="block text-xs uppercase tracking-widest font-bold text-amber-300">Teacher Verónica Hermida</span>
+                <h1 class="heading-font text-2xl sm:text-3xl font-extrabold tracking-tight text-white">
+                    Irregular Verbs List
+                </h1>
+                <p class="text-xs text-indigo-200 mt-0.5 hidden sm:block">A complete reference with pronunciations, phonetics, and simple example sentences for ESL learners.</p>
+            </div>
+
+            <!-- Navigation Tabs -->
+            <div class="flex items-center gap-2 bg-indigo-950/60 p-1.5 rounded-xl">
+                <button id="nav-list-btn" onclick="switchTab('list')" class="px-5 py-2 rounded-lg text-sm font-bold bg-indigo-600 text-white shadow-sm flex items-center gap-2">
+                    <i class="fa-solid fa-list-ul"></i>
+                    <span>Verb List</span>
+                </button>
+                <button id="nav-quiz-btn" onclick="switchTab('quiz')" class="px-5 py-2 rounded-lg text-sm font-bold text-indigo-200 hover:text-white hover:bg-indigo-800/50 flex items-center gap-2">
+                    <i class="fa-solid fa-circle-question"></i>
+                    <span>Practice Quiz</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- COLOR LEGEND BAR -->
+    <div class="bg-white border-b border-slate-200 py-3 px-4 shadow-xs">
+        <div class="max-w-6xl mx-auto flex flex-wrap items-center justify-center sm:justify-between gap-3 text-xs sm:text-sm font-semibold">
+            <span class="text-slate-500 flex items-center gap-1.5">
+                <i class="fa-solid fa-palette text-indigo-600"></i> Color Legend:
+            </span>
+            <div class="flex flex-wrap items-center gap-3 sm:gap-6">
+                <div class="flex items-center gap-2 px-3 py-1 rounded-lg bg-sky-100 text-sky-900 border border-sky-200">
+                    <span class="w-3 h-3 rounded-full bg-sky-500"></span>
+                    <span>V1: Base Form</span>
+                </div>
+                <div class="flex items-center gap-2 px-3 py-1 rounded-lg bg-purple-100 text-purple-900 border border-purple-200">
+                    <span class="w-3 h-3 rounded-full bg-purple-600"></span>
+                    <span>V2: Past Simple</span>
+                </div>
+                <div class="flex items-center gap-2 px-3 py-1 rounded-lg bg-amber-100 text-amber-900 border border-amber-200">
+                    <span class="w-3 h-3 rounded-full bg-amber-500"></span>
+                    <span>V3: Past Participle</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <main class="max-w-6xl mx-auto px-4 py-6 flex-1 w-full">
+
+        <!-- TAB 1: VERB LIST -->
+        <section id="list-tab" class="space-y-6">
+            
+            <!-- SEARCH AND EASY FILTERS -->
+            <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200 space-y-4">
+                
+                <!-- Search Box -->
+                <div class="relative">
+                    <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 text-lg"></i>
+                    <input type="text" id="search-input" onkeyup="filterVerbs()" placeholder="Type any verb to search (e.g., bring, go, went)..." class="w-full pl-12 pr-10 py-3.5 rounded-xl border-2 border-slate-200 focus:outline-none focus:border-indigo-600 text-slate-800 text-base font-medium">
+                    <button id="clear-search-btn" onclick="clearSearch()" class="hidden absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 p-2">
+                        <i class="fa-solid fa-xmark text-lg"></i>
+                    </button>
+                </div>
+
+                <!-- Simple Filter Buttons -->
+                <div class="space-y-2">
+                    <span class="text-xs font-bold text-slate-500 uppercase tracking-wider block">Filter Verbs by Type:</span>
+                    <div class="flex flex-wrap gap-2">
+                        <button onclick="setFilter('all')" id="filter-btn-all" class="filter-btn active px-4 py-2 rounded-xl text-xs sm:text-sm font-bold bg-indigo-600 text-white shadow-xs">
+                            All Verbs
+                        </button>
+                        <button onclick="setFilter('aaa')" id="filter-btn-aaa" class="filter-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-bold bg-slate-100 text-slate-700 hover:bg-slate-200">
+                            3 Forms Same
+                        </button>
+                        <button onclick="setFilter('abb')" id="filter-btn-abb" class="filter-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-bold bg-slate-100 text-slate-700 hover:bg-slate-200">
+                            Past & Participle Same
+                        </button>
+                        <button onclick="setFilter('abc')" id="filter-btn-abc" class="filter-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-bold bg-slate-100 text-slate-700 hover:bg-slate-200">
+                            All 3 Forms Different
+                        </button>
+                    </div>
+                </div>
+
+                <div class="text-xs text-slate-500 font-semibold pt-1">
+                    Showing <span id="visible-count" class="text-indigo-600 font-bold">0</span> verbs
+                </div>
+            </div>
+
+            <!-- VERBS CARDS CONTAINER -->
+            <div id="verbs-cards-container" class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                <!-- Cards dynamically populated -->
+            </div>
+
+            <!-- EMPTY STATE -->
+            <div id="empty-state" class="hidden bg-white rounded-2xl p-10 text-center shadow-sm border border-slate-200 space-y-3">
+                <i class="fa-solid fa-magnifying-glass text-3xl text-slate-300"></i>
+                <h3 class="text-lg font-bold text-slate-800">No verbs found</h3>
+                <p class="text-slate-500 text-sm">Try typing a different verb or click "All Verbs".</p>
+                <button onclick="resetFilters()" class="px-4 py-2 bg-indigo-600 text-white font-bold rounded-xl text-xs">
+                    Show All Verbs
+                </button>
+            </div>
+
+        </section>
+
+        <!-- TAB 2: PRACTICE QUIZ -->
+        <section id="quiz-tab" class="hidden max-w-2xl mx-auto space-y-6">
+            <div class="bg-white p-6 sm:p-8 rounded-2xl shadow-sm border border-slate-200 text-center space-y-6">
+                
+                <div>
+                    <h2 class="heading-font text-2xl font-extrabold text-slate-900">Practice Quiz</h2>
+                    <p class="text-slate-500 text-sm mt-1">Fill in the missing verb form to test your knowledge!</p>
+                </div>
+
+                <div class="flex justify-around items-center bg-slate-50 p-4 rounded-xl border border-slate-200 text-slate-700">
+                    <div>
+                        <span class="block text-xs font-bold uppercase text-slate-400">Score</span>
+                        <span id="quiz-score" class="text-2xl font-black text-indigo-600">0</span>
+                    </div>
+                    <div class="h-8 w-px bg-slate-200"></div>
+                    <div>
+                        <span class="block text-xs font-bold uppercase text-slate-400">Correct Answers</span>
+                        <span id="quiz-total" class="text-2xl font-black text-emerald-600">0</span>
+                    </div>
+                </div>
+
+                <div class="bg-slate-900 text-white p-6 rounded-2xl shadow-md text-left space-y-5">
+                    
+                    <div class="flex justify-between items-center border-b border-slate-800 pb-3">
+                        <span class="text-xs font-bold text-slate-400 uppercase tracking-wider">Fill in the blank</span>
+                        <button onclick="playQuizAudio()" class="text-indigo-400 hover:text-white transition flex items-center gap-1 text-xs font-bold">
+                            <i class="fa-solid fa-volume-high text-sm"></i> Listen
+                        </button>
+                    </div>
+
+                    <div class="grid grid-cols-3 gap-3 text-center">
+                        <div class="bg-slate-800 p-3 rounded-xl border border-slate-700">
+                            <span class="block text-[10px] font-bold text-sky-400 uppercase">V1 (Base)</span>
+                            <span id="q-base" class="text-base font-bold text-white mt-1 block">--</span>
+                        </div>
+                        <div class="bg-slate-800 p-3 rounded-xl border border-slate-700">
+                            <span class="block text-[10px] font-bold text-purple-400 uppercase">V2 (Past)</span>
+                            <span id="q-past" class="text-base font-bold text-white mt-1 block">--</span>
+                        </div>
+                        <div class="bg-slate-800 p-3 rounded-xl border border-slate-700">
+                            <span class="block text-[10px] font-bold text-amber-400 uppercase">V3 (Participle)</span>
+                            <span id="q-participle" class="text-base font-bold text-white mt-1 block">--</span>
+                        </div>
+                    </div>
+
+                    <div class="space-y-2">
+                        <label id="quiz-question-label" class="block text-sm font-bold text-slate-200">
+                            Type your answer:
+                        </label>
+                        <input type="text" id="quiz-input" placeholder="Type answer here..." autocomplete="off" class="w-full py-3 px-4 rounded-xl bg-slate-800 border-2 border-slate-700 text-white font-bold text-base focus:outline-none focus:border-indigo-400">
+                    </div>
+
+                    <div id="quiz-feedback" class="hidden p-4 rounded-xl text-sm font-bold"></div>
+
+                    <div class="flex gap-3">
+                        <button id="quiz-submit-btn" onclick="checkQuizAnswer()" class="w-full py-3 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-bold transition">
+                            Check Answer
+                        </button>
+                        <button id="quiz-next-btn" onclick="nextQuizQuestion()" class="hidden w-full py-3 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold transition">
+                            Next Question &rarr;
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- SCRIPT WITH COMPLETE ALPHABETICAL VERB DATABASE -->
+    <script>
+        const irregularVerbs = [
+            { base: "be", basePhonetic: "/biː/", past: "was / were", pastPhonetic: "/wɒz, wɜː/", participle: "been", participlePhonetic: "/biːn/", pattern: "abc", examples: { base: "I want to **be** a teacher.", past: "She **was** happy yesterday.", participle: "They have **been** friends forever." } },
+            { base: "beat", basePhonetic: "/biːt/", past: "beat", pastPhonetic: "/biːt/", participle: "beaten", participlePhonetic: "/ˈbiːtn/", pattern: "abc", examples: { base: "You can **beat** the high score.", past: "Our team **beat** them 2-0.", participle: "He has never been **beaten** in chess." } },
+            { base: "become", basePhonetic: "/bɪˈkʌm/", past: "became", pastPhonetic: "/bɪˈkeɪm/", participle: "become", participlePhonetic: "/bɪˈkʌm/", pattern: "aba", examples: { base: "Caterpillars **become** butterflies.", past: "He **became** a doctor last year.", participle: "It has **become** colder outside." } },
+            { base: "begin", basePhonetic: "/bɪˈɡɪn/", past: "began", pastPhonetic: "/bɪˈɡæn/", participle: "begun", participlePhonetic: "/bɪˈɡʌn/", pattern: "abc", examples: { base: "Class **begins** at 9:00 AM.", past: "The movie **began** five minutes ago.", participle: "The concert has already **begun**." } },
+            { base: "bend", basePhonetic: "/bend/", past: "bent", pastPhonetic: "/bent/", participle: "bent", participlePhonetic: "/bent/", pattern: "abb", examples: { base: "Do not **bend** the paper.", past: "He **bent** down to tie his shoe.", participle: "The metal bar is **bent**." } },
+            { base: "bet", basePhonetic: "/bet/", past: "bet", pastPhonetic: "/bet/", participle: "bet", participlePhonetic: "/bet/", pattern: "aaa", examples: { base: "I **bet** you will pass the test.", past: "She **bet** $5 on the game.", participle: "He has **bet** all his money." } },
+            { base: "bite", basePhonetic: "/baɪt/", past: "bit", pastPhonetic: "/bɪt/", participle: "bitten", participlePhonetic: "/ˈbɪtn/", pattern: "abc", examples: { base: "Don't let the dog **bite** you.", past: "The mosquito **bit** my arm.", participle: "He was **bitten** by an insect." } },
+            { base: "blow", basePhonetic: "/bləʊ/", past: "blew", pastPhonetic: "/bluː/", participle: "blown", participlePhonetic: "/bləʊn/", pattern: "abc", examples: { base: "The wind starts to **blow**.", past: "He **blew** out the birthday candles.", participle: "The wind has **blown** the door shut." } },
+            { base: "break", basePhonetic: "/breɪk/", past: "broke", pastPhonetic: "/brəʊk/", participle: "broken", participlePhonetic: "/ˈbrəʊkən/", pattern: "abc", examples: { base: "Please don't **break** the glass.", past: "He **broke** his pencil yesterday.", participle: "My smartphone screen is **broken**." } },
+            { base: "bring", basePhonetic: "/brɪŋ/", past: "brought", pastPhonetic: "/brɔːt/", participle: "brought", participlePhonetic: "/brɔːt/", pattern: "abb", examples: { base: "Please **bring** your textbook to class.", past: "She **brought** delicious cake yesterday.", participle: "They have **brought** us good news." } },
+            { base: "broadcast", basePhonetic: "/ˈbrɔːdkɑːst/", past: "broadcast", pastPhonetic: "/ˈbrɔːdkɑːst/", participle: "broadcast", participlePhonetic: "/ˈbrɔːdkɑːst/", pattern: "aaa", examples: { base: "They **broadcast** the news live.", past: "The station **broadcast** the match.", participle: "It was **broadcast** around the world." } },
+            { base: "build", basePhonetic: "/bɪld/", past: "built", pastPhonetic: "/bɪlt/", participle: "built", participlePhonetic: "/bɪlt/", pattern: "abb", examples: { base: "They **build** new houses here.", past: "Workers **built** this bridge in 1990.", participle: "The house was **built** of brick." } },
+            { base: "burst", basePhonetic: "/bɜːst/", past: "burst", pastPhonetic: "/bɜːst/", participle: "burst", participlePhonetic: "/bɜːst/", pattern: "aaa", examples: { base: "Balloons can **burst** easily.", past: "The pipe **burst** during winter.", participle: "The balloon has **burst**." } },
+            { base: "buy", basePhonetic: "/baɪ/", past: "bought", pastPhonetic: "/bɔːt/", participle: "bought", participlePhonetic: "/bɔːt/", pattern: "abb", examples: { base: "I need to **buy** fresh milk.", past: "Yesterday, I **bought** new shoes.", participle: "She has **bought** tickets for the show." } },
+            { base: "catch", basePhonetic: "/kætʃ/", past: "caught", pastPhonetic: "/kɔːt/", participle: "caught", participlePhonetic: "/kɔːt/", pattern: "abb", examples: { base: "Try to **catch** the ball.", past: "He **caught** a cold last week.", participle: "The thief was **caught** by police." } },
+            { base: "choose", basePhonetic: "/tʃuːz/", past: "chose", pastPhonetic: "/tʃəʊz/", participle: "chosen", participlePhonetic: "/ˈtʃəʊzn/", pattern: "abc", examples: { base: "You can **choose** any color.", past: "She **chose** the red dress.", participle: "We have **chosen** a winner." } },
+            { base: "come", basePhonetic: "/kʌm/", past: "came", pastPhonetic: "/keɪm/", participle: "come", participlePhonetic: "/kʌm/", pattern: "aba", examples: { base: "Please **come** in.", past: "My uncle **came** to visit us.", participle: "A parcel has **come** for you." } },
+            { base: "cost", basePhonetic: "/kɒst/", past: "cost", pastPhonetic: "/kɒst/", participle: "cost", participlePhonetic: "/kɒst/", pattern: "aaa", examples: { base: "How much does it **cost**?", past: "The book **cost** $15 yesterday.", participle: "It has **cost** us a lot of money." } },
+            { base: "creep", basePhonetic: "/kriːp/", past: "crept", pastPhonetic: "/krept/", participle: "crept", participlePhonetic: "/krept/", pattern: "abb", examples: { base: "Cats **creep** quietly.", past: "The cat **crept** towards the bird.", participle: "He has **crept** into the room." } },
+            { base: "cut", basePhonetic: "/kʌt/", past: "cut", pastPhonetic: "/kʌt/", participle: "cut", participlePhonetic: "/kʌt/", pattern: "aaa", examples: { base: "Be careful when you **cut** paper.", past: "He **cut** his finger yesterday.", participle: "The cake has been **cut** into pieces." } },
+            { base: "deal", basePhonetic: "/diːl/", past: "dealt", pastPhonetic: "/delt/", participle: "dealt", participlePhonetic: "/delt/", pattern: "abb", examples: { base: "How do you **deal** with stress?", past: "She **dealt** with the problem well.", participle: "We have **dealt** with this client before." } },
+            { base: "dig", basePhonetic: "/dɪɡ/", past: "dug", pastPhonetic: "/dʌɡ/", participle: "dug", participlePhonetic: "/dʌɡ/", pattern: "abb", examples: { base: "Dogs like to **dig** holes.", past: "They **dug** a deep trench.", participle: "The garden has been **dug** up." } },
+            { base: "do", basePhonetic: "/duː/", past: "did", pastPhonetic: "/dɪd/", participle: "done", participlePhonetic: "/dʌn/", pattern: "abc", examples: { base: "I **do** my homework every day.", past: "She **did** a great job on the test.", participle: "I have already **done** my chores." } },
+            { base: "draw", basePhonetic: "/drɔː/", past: "drew", pastPhonetic: "/druː/", participle: "drawn", participlePhonetic: "/drɔːn/", pattern: "abc", examples: { base: "I like to **draw** flowers.", past: "She **drew** a picture of a cat.", participle: "He has **drawn** a map for us." } },
+            { base: "drink", basePhonetic: "/drɪŋk/", past: "drank", pastPhonetic: "/dræŋk/", participle: "drunk", participlePhonetic: "/drʌŋk/", pattern: "abc", examples: { base: "Drink plenty of water.", past: "He **drank** a glass of milk.", participle: "They have **drunk** all the juice." } },
+            { base: "drive", basePhonetic: "/draɪv/", past: "drove", pastPhonetic: "/drəʊv/", participle: "driven", participlePhonetic: "/ˈdrɪvn/", pattern: "abc", examples: { base: "Learn how to **drive** a car.", past: "She **drove** to work this morning.", participle: "He has **driven** across the country." } },
+            { base: "eat", basePhonetic: "/iːt/", past: "ate", pastPhonetic: "/eɪt/", participle: "eaten", participlePhonetic: "/ˈiːtn/", pattern: "abc", examples: { base: "I **eat** an apple every morning.", past: "We **ate** pizza last night.", participle: "Have you **eaten** lunch yet?" } },
+            { base: "fall", basePhonetic: "/fɔːl/", past: "fell", pastPhonetic: "/fel/", participle: "fallen", participlePhonetic: "/ˈfɔːlən/", pattern: "abc", examples: { base: "Leaves **fall** in autumn.", past: "He **fell** off his bicycle.", participle: "Snow has **fallen** overnight." } },
+            { base: "feed", basePhonetic: "/fiːd/", past: "fed", pastPhonetic: "/fed/", participle: "fed", participlePhonetic: "/fed/", pattern: "abb", examples: { base: "Please **feed** the cat.", past: "She **fed** the baby ten minutes ago.", participle: "Have you **fed** the dog?" } },
+            { base: "feel", basePhonetic: "/fiːl/", past: "felt", pastPhonetic: "/felt/", participle: "felt", participlePhonetic: "/felt/", pattern: "abb", examples: { base: "I **feel** happy today.", past: "He **felt** sick yesterday.", participle: "She has **felt** better today." } },
+            { base: "fight", basePhonetic: "/faɪt/", past: "fought", pastPhonetic: "/fɔːt/", participle: "fought", participlePhonetic: "/fɔːt/", pattern: "abb", examples: { base: "Brothers sometimes **fight**.", past: "They **fought** for equal rights.", participle: "Soldiers have **fought** bravely." } },
+            { base: "find", basePhonetic: "/faɪnd/", past: "found", pastPhonetic: "/faʊnd/", participle: "found", participlePhonetic: "/faʊnd/", pattern: "abb", examples: { base: "Can you **find** my glasses?", past: "I **found** a coin on the street.", participle: "She has **found** a new job." } },
+            { base: "flee", basePhonetic: "/fliː/", past: "fled", pastPhonetic: "/fled/", participle: "fled", participlePhonetic: "/fled/", pattern: "abb", examples: { base: "Animals **flee** from danger.", past: "The bandits **fled** the scene.", participle: "They have **fled** the area." } },
+            { base: "fly", basePhonetic: "/flaɪ/", past: "flew", pastPhonetic: "/fluː/", participle: "flown", participlePhonetic: "/fləʊn/", pattern: "abc", examples: { base: "Birds **fly** south in winter.", past: "We **flew** to London last year.", participle: "She has **flown** in a helicopter." } },
+            { base: "forbid", basePhonetic: "/fəˈbɪd/", past: "forbade", pastPhonetic: "/fəˈbæd/", participle: "forbidden", participlePhonetic: "/fəˈbɪdn/", pattern: "abc", examples: { base: "Rules **forbid** smoking here.", past: "My doctor **forbade** sugar.", participle: "Parking is **forbidden** here." } },
+            { base: "forget", basePhonetic: "/fəˈɡet/", past: "forgot", pastPhonetic: "/fəˈɡɒt/", participle: "forgotten", participlePhonetic: "/fəˈɡɒtn/", pattern: "abc", examples: { base: "Don't **forget** your keys.", past: "I **forgot** my password.", participle: "He has **forgotten** my name." } },
+            { base: "forgive", basePhonetic: "/fəˈɡɪv/", past: "forgave", pastPhonetic: "/fəˈɡeɪv/", participle: "forgiven", participlePhonetic: "/fəˈɡɪvn/", pattern: "abc", examples: { base: "Please **forgive** my mistake.", past: "She **forgave** him for being late.", participle: "All is **forgiven**." } },
+            { base: "freeze", basePhonetic: "/friːz/", past: "froze", pastPhonetic: "/frəʊz/", participle: "frozen", participlePhonetic: "/ˈfrəʊzn/", pattern: "abc", examples: { base: "Water turns to ice when it **freezes**.", past: "The lake **froze** last winter.", participle: "My hands are **frozen**." } },
+            { base: "get", basePhonetic: "/ɡet/", past: "got", pastPhonetic: "/ɡɒt/", participle: "got / gotten", participlePhonetic: "/ɡɒt, ˈɡɒtn/", pattern: "abb", examples: { base: "I **get** good grades.", past: "She **got** a letter today.", participle: "He has **gotten** much better." } },
+            { base: "give", basePhonetic: "/ɡɪv/", past: "gave", pastPhonetic: "/ɡeɪv/", participle: "given", participlePhonetic: "/ˈɡɪvn/", pattern: "abc", examples: { base: "Please **give** me a clue.", past: "My father **gave** me a watch.", participle: "She was **given** an award." } },
+            { base: "go", basePhonetic: "/ɡəʊ/", past: "went", pastPhonetic: "/went/", participle: "gone", participlePhonetic: "/ɡɒn/", pattern: "abc", examples: { base: "I **go** to school by bus.", past: "Yesterday, we **went** to the park.", participle: "She has **gone** home." } },
+            { base: "grow", basePhonetic: "/ɡrəʊ/", past: "grew", pastPhonetic: "/ɡruː/", participle: "grown", participlePhonetic: "/ɡrəʊn/", pattern: "abc", examples: { base: "Plants **grow** quickly in spring.", past: "The child **grew** two inches.", participle: "He has **grown** up fast." } },
+            { base: "hang", basePhonetic: "/hæŋ/", past: "hung", pastPhonetic: "/hʌŋ/", participle: "hung", participlePhonetic: "/hʌŋ/", pattern: "abb", examples: { base: "You can **hang** your coat here.", past: "She **hung** the painting on the wall.", participle: "The picture is **hung** straight." } },
+            { base: "have", basePhonetic: "/hæv/", past: "had", pastPhonetic: "/hæd/", participle: "had", participlePhonetic: "/hæd/", pattern: "abb", examples: { base: "They **have** a nice car.", past: "We **had** fun last Saturday.", participle: "I have **had** a busy day." } },
+            { base: "hear", basePhonetic: "/hɪə/", past: "heard", pastPhonetic: "/hɜːd/", participle: "heard", participlePhonetic: "/hɜːd/", pattern: "abb", examples: { base: "Can you **hear** that music?", past: "I **heard** a noise last night.", participle: "Have you **heard** the news?" } },
+            { base: "hide", basePhonetic: "/haɪd/", past: "hid", pastPhonetic: "/hɪd/", participle: "hidden", participlePhonetic: "/ˈhɪdn/", pattern: "abc", examples: { base: "Children like to **hide**.", past: "The cat **hid** under the bed.", participle: "The key is **hidden**." } },
+            { base: "hit", basePhonetic: "/hɪt/", past: "hit", pastPhonetic: "/hɪt/", participle: "hit", participlePhonetic: "/hɪt/", pattern: "aaa", examples: { base: "Don't **hit** the ball too hard.", past: "The car **hit** the sign.", participle: "The ball was **hit** out." } },
+            { base: "hold", basePhonetic: "/həʊld/", past: "held", pastPhonetic: "/held/", participle: "held", participlePhonetic: "/held/", pattern: "abb", examples: { base: "Please **hold** my bag.", past: "She **held** her baby in her arms.", participle: "The meeting was **held** yesterday." } },
+            { base: "hurt", basePhonetic: "/hɜːt/", past: "hurt", pastPhonetic: "/hɜːt/", participle: "hurt", participlePhonetic: "/hɜːt/", pattern: "aaa", examples: { base: "Small shoes **hurt** my feet.", past: "He **hurt** his knee playing football.", participle: "Nobody was **hurt** in the accident." } },
+            { base: "keep", basePhonetic: "/kiːp/", past: "kept", pastPhonetic: "/kept/", participle: "kept", participlePhonetic: "/kept/", pattern: "abb", examples: { base: "Always **keep** your promise.", past: "She **kept** all his letters.", participle: "He has **kept** his secret safe." } },
+            { base: "kneel", basePhonetic: "/niːl/", past: "knelt", pastPhonetic: "/nelt/", participle: "knelt", participlePhonetic: "/nelt/", pattern: "abb", examples: { base: "People **kneel** to pray.", past: "He **knelt** down to talk to the child.", participle: "She has **knelt** beside the garden." } },
+            { base: "know", basePhonetic: "/nəʊ/", past: "knew", pastPhonetic: "/njuː/", participle: "known", participlePhonetic: "/nəʊn/", pattern: "abc", examples: { base: "I **know** the answer.", past: "She **knew** him in high school.", participle: "He is **known** for his kindness." } },
+            { base: "lay", basePhonetic: "/leɪ/", past: "laid", pastPhonetic: "/leɪd/", participle: "laid", participlePhonetic: "/leɪd/", pattern: "abb", examples: { base: "Please **lay** the books on the table.", past: "Chickens **laid** three eggs.", participle: "The carpet was **laid** yesterday." } },
+            { base: "lead", basePhonetic: "/liːd/", past: "led", pastPhonetic: "/led/", participle: "led", participlePhonetic: "/led/", pattern: "abb", examples: { base: "A guide will **lead** the tour.", past: "The captain **led** his team.", participle: "She has **led** many projects." } },
+            { base: "leave", basePhonetic: "/liːv/", past: "left", pastPhonetic: "/left/", participle: "left", participlePhonetic: "/left/", pattern: "abb", examples: { base: "Train leaves at 5:00.", past: "I **left** my jacket at home.", participle: "They have already **left**." } },
+            { base: "lend", basePhonetic: "/lend/", past: "lent", pastPhonetic: "/lent/", participle: "lent", participlePhonetic: "/lent/", pattern: "abb", examples: { base: "Can you **lend** me a pen?", past: "She **lent** me her book yesterday.", participle: "I have **lent** him some money." } },
+            { base: "let", basePhonetic: "/let/", past: "let", pastPhonetic: "/let/", participle: "let", participlePhonetic: "/let/", pattern: "aaa", examples: { base: "Please **let** me in.", past: "My parents **let** me go out.", participle: "He was **let** into the building." } },
+            { base: "lie", basePhonetic: "/laɪ/", past: "lay", pastPhonetic: "/leɪ/", participle: "lain", participlePhonetic: "/leɪn/", pattern: "abc", examples: { base: "I want to **lie** on the grass.", past: "He **lay** down for a nap.", participle: "She has **lain** in bed all morning." } },
+            { base: "light", basePhonetic: "/laɪt/", past: "lit", pastPhonetic: "/lɪt/", participle: "lit", participlePhonetic: "/lɪt/", pattern: "abb", examples: { base: "Please **light** the candle.", past: "He **lit** a fire in the fireplace.", participle: "The room was **lit** by candles." } },
+            { base: "lose", basePhonetic: "/luːz/", past: "lost", pastPhonetic: "/lɒst/", participle: "lost", participlePhonetic: "/lɒst/", pattern: "abb", examples: { base: "Don't **lose** your passport.", past: "I **lost** my keys yesterday.", participle: "My wallet is **lost**." } },
+            { base: "make", basePhonetic: "/meɪk/", past: "made", pastPhonetic: "/meɪd/", participle: "made", participlePhonetic: "/meɪd/", pattern: "abb", examples: { base: "Let's **make** coffee.", past: "She **made** a cake yesterday.", participle: "This chair is **made** of wood." } },
+            { base: "mean", basePhonetic: "/miːn/", past: "meant", pastPhonetic: "/ment/", participle: "meant", participlePhonetic: "/ment/", pattern: "abb", examples: { base: "What does this word **mean**?", past: "I **meant** to call you earlier.", participle: "It was **meant** as a joke." } },
+            { base: "meet", basePhonetic: "/miːt/", past: "met", pastPhonetic: "/met/", participle: "met", participlePhonetic: "/met/", pattern: "abb", examples: { base: "Nice to **meet** you.", past: "I **met** my best friend in 2010.", participle: "Have you **met** the new teacher?" } },
+            { base: "pay", basePhonetic: "/peɪ/", past: "paid", pastPhonetic: "/peɪd/", participle: "paid", participlePhonetic: "/peɪd/", pattern: "abb", examples: { base: "I have to **pay** the bills.", past: "He **paid** for dinner yesterday.", participle: "The invoice has been **paid**." } },
+            { base: "put", basePhonetic: "/pʊt/", past: "put", pastPhonetic: "/pʊt/", participle: "put", participlePhonetic: "/pʊt/", pattern: "aaa", examples: { base: "Where should I **put** this box?", past: "She **put** the keys on the table.", participle: "He has **put** away his clothes." } },
+            { base: "read", basePhonetic: "/riːd/", past: "read", pastPhonetic: "/red/", participle: "read", participlePhonetic: "/red/", pattern: "aaa", examples: { base: "I **read** books every evening.", past: "She **read** a novel yesterday.", participle: "I have **read** that article." } },
+            { base: "ride", basePhonetic: "/raɪd/", past: "rode", pastPhonetic: "/rəʊd/", participle: "ridden", participlePhonetic: "/ˈrɪdn/", pattern: "abc", examples: { base: "Can you **ride** a bicycle?", past: "He **rode** a horse on vacation.", participle: "She has **ridden** a camel." } },
+            { base: "ring", basePhonetic: "/rɪŋ/", past: "rang", pastPhonetic: "/ræŋ/", participle: "rung", participlePhonetic: "/rʌŋ/", pattern: "abc", examples: { base: "The school bell starts to **ring**.", past: "The phone **rang** three times.", participle: "The bell has **rung**." } },
+            { base: "rise", basePhonetic: "/raɪz/", past: "rose", pastPhonetic: "/rəʊz/", participle: "risen", participlePhonetic: "/ˈrɪzn/", pattern: "abc", examples: { base: "The sun will **rise** at 6:00 AM.", past: "Prices **rose** sharply last month.", participle: "The sun has **risen**." } },
+            { base: "run", basePhonetic: "/rʌn/", past: "ran", pastPhonetic: "/ræn/", participle: "run", participlePhonetic: "/rʌn/", pattern: "aba", examples: { base: "I **run** 5 kilometers daily.", past: "She **ran** fast to catch the bus.", participle: "He has **run** three marathons." } },
+            { base: "say", basePhonetic: "/seɪ/", past: "said", pastPhonetic: "/sed/", participle: "said", participlePhonetic: "/sed/", pattern: "abb", examples: { base: "What did you **say**?", past: "She **said** goodbye and left.", participle: "Nothing was **said** about it." } },
+            { base: "see", basePhonetic: "/siː/", past: "saw", pastPhonetic: "/sɔː/", participle: "seen", participlePhonetic: "/siːn/", pattern: "abc", examples: { base: "Can you **see** that bird?", past: "I **saw** a movie last night.", participle: "Have you **seen** my keys?" } },
+            { base: "seek", basePhonetic: "/siːk/", past: "sought", pastPhonetic: "/sɔːt/", participle: "sought", participlePhonetic: "/sɔːt/", pattern: "abb", examples: { base: "You should **seek** advice.", past: "They **sought** shelter from rain.", participle: "Help was **sought** immediately." } },
+            { base: "sell", basePhonetic: "/sel/", past: "sold", pastPhonetic: "/səʊld/", participle: "sold", participlePhonetic: "/səʊld/", pattern: "abb", examples: { base: "They **sell** fresh fruit here.", past: "He **sold** his car last week.", participle: "The tickets are all **sold** out." } },
+            { base: "send", basePhonetic: "/send/", past: "sent", pastPhonetic: "/sent/", participle: "sent", participlePhonetic: "/sent/", pattern: "abb", examples: { base: "I will **send** an email.", past: "She **sent** a gift yesterday.", participle: "The package was **sent**." } },
+            { base: "set", basePhonetic: "/set/", past: "set", pastPhonetic: "/set/", participle: "set", participlePhonetic: "/set/", pattern: "aaa", examples: { base: "Please **set** the table.", past: "He **set** the alarm for 7:00 AM.", participle: "The table is **set** for dinner." } },
+            { base: "sew", basePhonetic: "/səʊ/", past: "sewed", pastPhonetic: "/səʊd/", participle: "sewn", participlePhonetic: "/səʊn/", pattern: "abc", examples: { base: "She likes to **sew** clothes.", past: "My grandma **sewed** a button.", participle: "The patch was **sewn** on." } },
+            { base: "shake", basePhonetic: "/ʃeɪk/", past: "shook", pastPhonetic: "/ʃʊk/", participle: "shaken", participlePhonetic: "/ˈʃeɪkən/", pattern: "abc", examples: { base: "**Shake** the bottle before opening.", past: "They **shook** hands when they met.", participle: "He was **shaken** by the news." } },
+            { base: "shine", basePhonetic: "/ʃaɪn/", past: "shone", pastPhonetic: "/ʃɒn/", participle: "shone", participlePhonetic: "/ʃɒn/", pattern: "abb", examples: { base: "Stars **shine** in the dark.", past: "The sun **shone** brightly all day.", participle: "The shoes are **shone** cleanly." } },
+            { base: "shoot", basePhonetic: "/ʃuːt/", past: "shot", pastPhonetic: "/ʃɒt/", participle: "shot", participlePhonetic: "/ʃɒt/", pattern: "abb", examples: { base: "He tried to **shoot** a goal.", past: "The photographer **shot** photos.", participle: "The movie was **shot** in Italy." } },
+            { base: "show", basePhonetic: "/ʃəʊ/", past: "showed", pastPhonetic: "/ʃəʊd/", participle: "shown", participlePhonetic: "/ʃəʊn/", pattern: "abc", examples: { base: "Can you **show** me the way?", past: "She **showed** us her new house.", participle: "He has **shown** improvement." } },
+            { base: "shrink", basePhonetic: "/ʃrɪŋk/", past: "shrank", pastPhonetic: "/ʃræŋk/", participle: "shrunk", participlePhonetic: "/ʃrʌŋk/", pattern: "abc", examples: { base: "Hot water can **shrink** wool.", past: "My sweater **shrank** in the wash.", participle: "The shirt has **shrunk**." } },
+            { base: "shut", basePhonetic: "/ʃʌt/", past: "shut", pastPhonetic: "/ʃʌt/", participle: "shut", participlePhonetic: "/ʃʌt/", pattern: "aaa", examples: { base: "Please **shut** the door.", past: "She **shut** her eyes and slept.", participle: "The shop is **shut** today." } },
+            { base: "sing", basePhonetic: "/sɪŋ/", past: "sang", pastPhonetic: "/sæŋ/", participle: "sung", participlePhonetic: "/sʌŋ/", pattern: "abc", examples: { base: "Birds **sing** in the morning.", past: "She **sang** a beautiful song.", participle: "They have **sung** together for years." } },
+            { base: "sink", basePhonetic: "/sɪŋk/", past: "sank", pastPhonetic: "/sæŋk/", participle: "sunk", participlePhonetic: "/sʌŋk/", pattern: "abc", examples: { base: "Stones **sink** in water.", past: "The ship **sank** in 1912.", participle: "The boat has **sunk**." } },
+            { base: "sit", basePhonetic: "/sɪt/", past: "sat", pastPhonetic: "/sæt/", participle: "sat", participlePhonetic: "/sæt/", pattern: "abb", examples: { base: "Please **sit** down.", past: "We **sat** on the bench in the park.", participle: "She has **sat** there for hours." } },
+            { base: "sleep", basePhonetic: "/sliːp/", past: "slept", pastPhonetic: "/slept/", participle: "slept", participlePhonetic: "/slept/", pattern: "abb", examples: { base: "I usually **sleep** 8 hours.", past: "He **slept** very well last night.", participle: "She has **slept** through the alarm." } },
+            { base: "slide", basePhonetic: "/slaɪd/", past: "slid", pastPhonetic: "/slɪd/", participle: "slid", participlePhonetic: "/slɪd/", pattern: "abb", examples: { base: "Children **slide** on ice.", past: "The glass **slid** off the table.", participle: "He has **slid** down the hill." } },
+            { base: "speak", basePhonetic: "/spiːk/", past: "spoke", pastPhonetic: "/spəʊk/", participle: "spoken", participlePhonetic: "/ˈspəʊkən/", pattern: "abc", examples: { base: "I **speak** English.", past: "The teacher **spoke** with me.", participle: "English is **spoken** worldwide." } },
+            { base: "spend", basePhonetic: "/spend/", past: "spent", pastPhonetic: "/spent/", participle: "spent", participlePhonetic: "/spent/", pattern: "abb", examples: { base: "How do you **spend** free time?", past: "I **spent** $20 on books.", participle: "We have **spent** all our savings." } },
+            { base: "spit", basePhonetic: "/spɪt/", past: "spat", pastPhonetic: "/spæt/", participle: "spat", participlePhonetic: "/spæt/", pattern: "abb", examples: { base: "Do not **spit** on the floor.", past: "He **spat** out the sour juice.", participle: "The seeds were **spat** out." } },
+            { base: "split", basePhonetic: "/splɪt/", past: "split", pastPhonetic: "/splɪt/", participle: "split", participlePhonetic: "/splɪt/", pattern: "aaa", examples: { base: "Let's **split** the bill.", past: "They **split** the pizza in half.", participle: "The group has **split** up." } },
+            { base: "spread", basePhonetic: "/spred/", past: "spread", pastPhonetic: "/spred/", participle: "spread", participlePhonetic: "/spred/", pattern: "aaa", examples: { base: "Butter is easy to **spread**.", past: "News **spread** quickly.", participle: "Butter was **spread** on toast." } },
+            { base: "spring", basePhonetic: "/sprɪŋ/", past: "sprang", pastPhonetic: "/spræŋ/", participle: "sprung", participlePhonetic: "/sprʌŋ/", pattern: "abc", examples: { base: "Cats **spring** gracefully.", past: "The cat **sprang** onto the couch.", participle: "A trap was **sprung**." } },
+            { base: "stand", basePhonetic: "/stænd/", past: "stood", pastPhonetic: "/stʊd/", participle: "stood", participlePhonetic: "/stʊd/", pattern: "abb", examples: { base: "Please **stand** up.", past: "They **stood** in line for an hour.", participle: "He has **stood** there all day." } },
+            { base: "steal", basePhonetic: "/stiːl/", past: "stole", pastPhonetic: "/stəʊl/", participle: "stolen", participlePhonetic: "/ˈstəʊlən/", pattern: "abc", examples: { base: "Thieves **steal** valuable items.", past: "Someone **stole** my bicycle.", participle: "My bike was **stolen**." } },
+            { base: "stick", basePhonetic: "/stɪk/", past: "stuck", pastPhonetic: "/stʌk/", participle: "stuck", participlePhonetic: "/stʌk/", pattern: "abb", examples: { base: "Use glue to **stick** paper.", past: "The paper **stuck** to my hands.", participle: "The key is **stuck** in the lock." } },
+            { base: "sting", basePhonetic: "/stɪŋ/", past: "stung", pastPhonetic: "/stʌŋ/", participle: "stung", participlePhonetic: "/stʌŋ/", pattern: "abb", examples: { base: "Bees can **sting** you.", past: "A bee **stung** my hand yesterday.", participle: "I have been **stung** by a wasp." } },
+            { base: "stink", basePhonetic: "/stɪŋk/", past: "stank", pastPhonetic: "/stæŋk/", participle: "stunk", participlePhonetic: "/stʌŋk/", pattern: "abc", examples: { base: "Garbage starts to **stink**.", past: "The room **stank** of smoke.", participle: "It has **stunk** all morning." } },
+            { base: "strike", basePhonetic: "/straɪk/", past: "struck", pastPhonetic: "/strʌk/", participle: "struck", participlePhonetic: "/strʌk/", pattern: "abb", examples: { base: "Lightning can **strike** trees.", past: "The clock **struck** twelve times.", participle: "The town was **struck** by a storm." } },
+            { base: "swear", basePhonetic: "/sweə/", past: "swore", pastPhonetic: "/swɔː/", participle: "sworn", participlePhonetic: "/swɔːn/", pattern: "abc", examples: { base: "I **swear** to tell the truth.", past: "He **swore** that he was innocent.", participle: "Witnesses have **sworn** an oath." } },
+            { base: "sweep", basePhonetic: "/swiːp/", past: "swept", pastPhonetic: "/swept/", participle: "swept", participlePhonetic: "/swept/", pattern: "abb", examples: { base: "Please **sweep** the kitchen floor.", past: "She **swept** the floor this morning.", participle: "The leaves were **swept** away." } },
+            { base: "swim", basePhonetic: "/swɪm/", past: "swam", pastPhonetic: "/swæm/", participle: "swum", participlePhonetic: "/swʌm/", pattern: "abc", examples: { base: "I like to **swim** in summer.", past: "We **swam** across the lake.", participle: "He has **swum** in the ocean." } },
+            { base: "swing", basePhonetic: "/swɪŋ/", past: "swung", pastPhonetic: "/swʌŋ/", participle: "swung", participlePhonetic: "/swʌŋ/", pattern: "abb", examples: { base: "Children **swing** at the park.", past: "He **swung** the baseball bat.", participle: "The pendulum has **swung** back." } },
+            { base: "take", basePhonetic: "/teɪk/", past: "took", pastPhonetic: "/tʊk/", participle: "taken", participlePhonetic: "/ˈteɪkən/", pattern: "abc", examples: { base: "Please **take** a seat.", past: "She **took** a picture.", participle: "Someone has **taken** my umbrella." } },
+            { base: "teach", basePhonetic: "/tiːtʃ/", past: "taught", pastPhonetic: "/tɔːt/", participle: "taught", participlePhonetic: "/tɔːt/", pattern: "abb", examples: { base: "I **teach** English.", past: "She **taught** math for 10 years.", participle: "He has **taught** many students." } },
+            { base: "tear", basePhonetic: "/teə/", past: "tore", pastPhonetic: "/tɔː/", participle: "torn", participlePhonetic: "/tɔːn/", pattern: "abc", examples: { base: "Don't **tear** the paper.", past: "He **tore** his shirt on a nail.", participle: "The document was **torn** up." } },
+            { base: "tell", basePhonetic: "/tel/", past: "told", pastPhonetic: "/təʊld/", participle: "told", participlePhonetic: "/təʊld/", pattern: "abb", examples: { base: "**Tell** me a story.", past: "She **told** us the truth.", participle: "I have **told** you three times." } },
+            { base: "think", basePhonetic: "/θɪŋk/", past: "thought", pastPhonetic: "/θɔːt/", participle: "thought", participlePhonetic: "/θɔːt/", pattern: "abb", examples: { base: "I **think** it will rain.", past: "She **thought** about the problem.", participle: "We have **thought** of a solution." } },
+            { base: "throw", basePhonetic: "/θrəʊ/", past: "threw", pastPhonetic: "/θruː/", participle: "thrown", participlePhonetic: "/θrəʊn/", pattern: "abc", examples: { base: "**Throw** the ball to me.", past: "He **threw** the ball over the wall.", participle: "Garbage was **thrown** away." } },
+            { base: "understand", basePhonetic: "/ˌʌndəˈstænd/", past: "understood", pastPhonetic: "/ˌʌndəˈstʊd/", participle: "understood", participlePhonetic: "/ˌʌndəˈstʊd/", pattern: "abb", examples: { base: "Do you **understand**?", past: "I **understood** the lesson clearly.", participle: "Everything is **understood**." } },
+            { base: "wake", basePhonetic: "/weɪk/", past: "woke", pastPhonetic: "/wəʊk/", participle: "woken", participlePhonetic: "/ˈwəʊkən/", pattern: "abc", examples: { base: "I **wake** up at 7:00 AM.", past: "She **woke** up late yesterday.", participle: "He has **woken** up early." } },
+            { base: "wear", basePhonetic: "/weə/", past: "wore", pastPhonetic: "/wɔː/", participle: "worn", participlePhonetic: "/wɔːn/", pattern: "abc", examples: { base: "I **wear** a jacket in winter.", past: "She **wore** a red dress to the party.", participle: "These shoes are **worn** out." } },
+            { base: "weep", basePhonetic: "/wiːp/", past: "wept", pastPhonetic: "/wept/", participle: "wept", participlePhonetic: "/wept/", pattern: "abb", examples: { base: "People **weep** during sad movies.", past: "She **wept** tears of joy.", participle: "They have **wept** together." } },
+            { base: "win", basePhonetic: "/wɪn/", past: "won", pastPhonetic: "/wʌn/", participle: "won", participlePhonetic: "/wʌn/", pattern: "abb", examples: { base: "We want to **win** the match.", past: "Our team **won** the game 3-1.", participle: "She has **won** three medals." } },
+            { base: "write", basePhonetic: "/raɪt/", past: "wrote", pastPhonetic: "/rəʊt/", participle: "written", participlePhonetic: "/ˈrɪtn/", pattern: "abc", examples: { base: "I **write** in my diary.", past: "He **wrote** a letter yesterday.", participle: "She has **written** three books." } }
+        ];
+
+        let activeTab = 'list';
+        let currentFilter = 'all';
+        let openExampleIds = new Set();
+        let currentQuizVerb = null;
+        let quizTargetForm = 'past';
+        let quizScore = 0;
+        let quizTotal = 0;
+
+        window.onload = function() {
+            renderVerbs();
+            setupQuizQuestion();
+        };
+
+        function switchTab(tabName) {
+            activeTab = tabName;
+            document.getElementById('list-tab').classList.add('hidden');
+            document.getElementById('quiz-tab').classList.add('hidden');
+
+            document.getElementById('nav-list-btn').className = "px-5 py-2 rounded-lg text-sm font-bold text-indigo-200 hover:text-white hover:bg-indigo-800/50 flex items-center gap-2";
+            document.getElementById('nav-quiz-btn').className = "px-5 py-2 rounded-lg text-sm font-bold text-indigo-200 hover:text-white hover:bg-indigo-800/50 flex items-center gap-2";
+
+            if (tabName === 'list') {
+                document.getElementById('list-tab').classList.remove('hidden');
+                document.getElementById('nav-list-btn').className = "px-5 py-2 rounded-lg text-sm font-bold bg-indigo-600 text-white shadow-sm flex items-center gap-2";
+                renderVerbs();
+            } else {
+                document.getElementById('quiz-tab').classList.remove('hidden');
+                document.getElementById('nav-quiz-btn').className = "px-5 py-2 rounded-lg text-sm font-bold bg-indigo-600 text-white shadow-sm flex items-center gap-2";
+            }
+        }
+
+        function setFilter(pattern) {
+            currentFilter = pattern;
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.className = "filter-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-bold bg-slate-100 text-slate-700 hover:bg-slate-200";
+            });
+            document.getElementById(`filter-btn-${pattern}`).className = "filter-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-bold bg-indigo-600 text-white shadow-xs";
+            filterVerbs();
+        }
+
+        function filterVerbs() {
+            const query = document.getElementById('search-input').value.toLowerCase().trim();
+            const clearBtn = document.getElementById('clear-search-btn');
+
+            if (query.length > 0) clearBtn.classList.remove('hidden');
+            else clearBtn.classList.add('hidden');
+
+            const filtered = irregularVerbs.filter(verb => {
+                const matchesSearch = verb.base.toLowerCase().includes(query) ||
+                                      verb.past.toLowerCase().includes(query) ||
+                                      verb.participle.toLowerCase().includes(query);
+                
+                const matchesPattern = currentFilter === 'all' || verb.pattern === currentFilter;
+
+                return matchesSearch && matchesPattern;
+            });
+
+            renderVerbCards(filtered);
+        }
+
+        function clearSearch() {
+            document.getElementById('search-input').value = '';
+            filterVerbs();
+        }
+
+        function resetFilters() {
+            document.getElementById('search-input').value = '';
+            setFilter('all');
+        }
+
+        function renderVerbs() {
+            filterVerbs();
+        }
+
+        function renderVerbCards(verbs) {
+            const container = document.getElementById('verbs-cards-container');
+            const emptyState = document.getElementById('empty-state');
+            document.getElementById('visible-count').textContent = verbs.length;
+
+            if (verbs.length === 0) {
+                container.innerHTML = '';
+                emptyState.classList.remove('hidden');
+                return;
+            } else {
+                emptyState.classList.add('hidden');
+            }
+
+            container.innerHTML = verbs.map(verb => {
+                const isExpanded = openExampleIds.has(verb.base);
+
+                return `
+                <div class="bg-white rounded-2xl p-5 shadow-sm border border-slate-200 flex flex-col justify-between space-y-4">
+                    
+                    <!-- Audio & Top Header -->
+                    <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                        <span class="text-xs font-bold text-slate-400 uppercase tracking-wider">Irregular Verb</span>
+                        <button onclick="speakVerb('${verb.base}', '${verb.past}', '${verb.participle}')" class="px-3 py-1.5 rounded-xl bg-indigo-50 hover:bg-indigo-100 text-indigo-700 text-xs font-bold transition flex items-center gap-1.5">
+                            <i class="fa-solid fa-volume-high text-sm"></i>
+                            <span>Listen Audio</span>
+                        </button>
+                    </div>
+
+                    <!-- 3 Forms Grid (Phonetics placed DIRECTLY BELOW each form) -->
+                    <div class="grid grid-cols-3 gap-2.5 text-center">
+                        
+                        <!-- Base Form -->
+                        <div class="bg-sky-50 border border-sky-200 p-3 rounded-xl flex flex-col justify-center">
+                            <span class="text-[10px] font-bold text-sky-700 uppercase tracking-wider">1. Base</span>
+                            <span class="font-extrabold text-slate-900 text-lg mt-0.5">${verb.base}</span>
+                            <span class="text-[11px] font-mono text-sky-600 font-semibold mt-1">${verb.basePhonetic}</span>
+                        </div>
+
+                        <!-- Past Simple -->
+                        <div class="bg-purple-50 border border-purple-200 p-3 rounded-xl flex flex-col justify-center">
+                            <span class="text-[10px] font-bold text-purple-700 uppercase tracking-wider">2. Past</span>
+                            <span class="font-extrabold text-slate-900 text-lg mt-0.5">${verb.past}</span>
+                            <span class="text-[11px] font-mono text-purple-600 font-semibold mt-1">${verb.pastPhonetic}</span>
+                        </div>
+
+                        <!-- Past Participle -->
+                        <div class="bg-amber-50 border border-amber-200 p-3 rounded-xl flex flex-col justify-center">
+                            <span class="text-[10px] font-bold text-amber-700 uppercase tracking-wider">3. Participle</span>
+                            <span class="font-extrabold text-slate-900 text-lg mt-0.5">${verb.participle}</span>
+                            <span class="text-[11px] font-mono text-amber-600 font-semibold mt-1">${verb.participlePhonetic}</span>
+                        </div>
+
+                    </div>
+
+                    <!-- Examples Drawer -->
+                    <div>
+                        <button onclick="toggleExamples('${verb.base}')" class="w-full py-2.5 px-4 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold text-xs flex items-center justify-between transition">
+                            <span class="flex items-center gap-1.5">
+                                <i class="fa-solid fa-lightbulb text-amber-500"></i>
+                                <span>Examples</span>
+                            </span>
+                            <i class="fa-solid fa-chevron-${isExpanded ? 'up' : 'down'} text-slate-500"></i>
+                        </button>
+
+                        ${isExpanded ? `
+                        <div class="mt-3 p-4 bg-slate-900 text-slate-100 rounded-xl text-xs space-y-2.5">
+                            <div><strong class="text-sky-400 font-bold">1. Base:</strong> ${formatHighlight(verb.examples.base)}</div>
+                            <div><strong class="text-purple-400 font-bold">2. Past:</strong> ${formatHighlight(verb.examples.past)}</div>
+                            <div><strong class="text-amber-400 font-bold">3. Participle:</strong> ${formatHighlight(verb.examples.participle)}</div>
+                        </div>
+                        ` : ''}
+                    </div>
+
+                </div>
+                `;
+            }).join('');
+        }
+
+        function formatHighlight(sentence) {
+            return sentence.replace(/\*\*(.*?)\*\*/g, '<span class="font-bold underline text-amber-300">$1</span>');
+        }
+
+        function toggleExamples(verbBase) {
+            if (openExampleIds.has(verbBase)) {
+                openExampleIds.delete(verbBase);
+            } else {
+                openExampleIds.add(verbBase);
+            }
+            renderVerbs();
+        }
+
+        function speakVerb(base, past, participle) {
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel();
+                const utterance = new SpeechSynthesisUtterance(`${base}, ${past}, ${participle}`);
+                utterance.lang = 'en-US';
+                utterance.rate = 0.85;
+                window.speechSynthesis.speak(utterance);
+            }
+        }
+
+        // QUIZ LOGIC
+        function setupQuizQuestion() {
+            const randomIndex = Math.floor(Math.random() * irregularVerbs.length);
+            currentQuizVerb = irregularVerbs[randomIndex];
+            quizTargetForm = Math.random() > 0.5 ? 'past' : 'participle';
+
+            document.getElementById('q-base').textContent = currentQuizVerb.base;
+
+            if (quizTargetForm === 'past') {
+                document.getElementById('q-past').textContent = '???';
+                document.getElementById('q-participle').textContent = currentQuizVerb.participle;
+                document.getElementById('quiz-question-label').textContent = `Type the Past Simple (V2) form for "${currentQuizVerb.base}":`;
+            } else {
+                document.getElementById('q-past').textContent = currentQuizVerb.past;
+                document.getElementById('q-participle').textContent = '???';
+                document.getElementById('quiz-question-label').textContent = `Type the Past Participle (V3) form for "${currentQuizVerb.base}":`;
+            }
+
+            const input = document.getElementById('quiz-input');
+            input.value = '';
+            input.disabled = false;
+            input.focus();
+
+            document.getElementById('quiz-feedback').className = "hidden p-4 rounded-xl text-sm font-bold";
+            document.getElementById('quiz-submit-btn').classList.remove('hidden');
+            document.getElementById('quiz-next-btn').classList.add('hidden');
+        }
+
+        function checkQuizAnswer() {
+            const userInput = document.getElementById('quiz-input').value.trim().toLowerCase();
+            const feedback = document.getElementById('quiz-feedback');
+            if (!userInput) return;
+
+            let correctAnswer = (quizTargetForm === 'past' ? currentQuizVerb.past : currentQuizVerb.participle).toLowerCase();
+            const possibleAnswers = correctAnswer.split('/').map(s => s.trim());
+            const isCorrect = possibleAnswers.some(ans => userInput === ans);
+
+            feedback.classList.remove('hidden');
+
+            if (isCorrect) {
+                quizScore += 1;
+                quizTotal++;
+                feedback.className = "p-4 rounded-xl text-sm font-bold bg-emerald-900/80 text-emerald-200 border border-emerald-500";
+                feedback.innerHTML = `<i class="fa-solid fa-circle-check text-emerald-400 mr-2"></i> Correct! Well done.`;
+            } else {
+                feedback.className = "p-4 rounded-xl text-sm font-bold bg-rose-900/80 text-rose-200 border border-rose-500";
+                feedback.innerHTML = `<i class="fa-solid fa-circle-xmark text-rose-400 mr-2"></i> Incorrect. The correct answer is: <strong class="text-white underline">${quizTargetForm === 'past' ? currentQuizVerb.past : currentQuizVerb.participle}</strong>`;
+            }
+
+            document.getElementById('quiz-score').textContent = quizScore;
+            document.getElementById('quiz-total').textContent = quizTotal;
+
+            document.getElementById('quiz-input').disabled = true;
+            document.getElementById('quiz-submit-btn').classList.add('hidden');
+            document.getElementById('quiz-next-btn').classList.remove('hidden');
+        }
+
+        function nextQuizQuestion() {
+            setupQuizQuestion();
+        }
+
+        function playQuizAudio() {
+            if (currentQuizVerb) speakVerb(currentQuizVerb.base, currentQuizVerb.past, currentQuizVerb.participle);
+        }
+
+        document.getElementById('quiz-input').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                if (!document.getElementById('quiz-submit-btn').classList.contains('hidden')) {
+                    checkQuizAnswer();
+                } else {
+                    nextQuizQuestion();
+                }
+            }
+        });
+    </script>
+</body>
+</html>
